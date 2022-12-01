@@ -1,0 +1,1 @@
+load src/res/Kindred.ppm kindred brighten 10 kindred brighterkindred save src/res/BrighterKindred.ppm brighterkindred q
