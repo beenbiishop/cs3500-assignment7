@@ -2,7 +2,6 @@ package view;
 
 
 import java.util.List;
-
 import model.Image;
 
 /**
@@ -12,6 +11,7 @@ public interface IView {
 
   /**
    * Adds feature to view.
+   *
    * @param features features to add to view.
    */
   void addFeatures(Features features);
@@ -28,6 +28,7 @@ public interface IView {
 
   /**
    * Takes component values from model for an image to set to the histogram Panel.
+   *
    * @param histogramList list of component value arrays.
    */
   void setHistogram(List<int[]> histogramList);

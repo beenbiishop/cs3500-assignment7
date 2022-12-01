@@ -2,29 +2,23 @@ package view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JOptionPane;
-import javax.swing.BoxLayout;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.util.List;
-
-import javax.swing.JFileChooser;
-
-
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import model.ImageUtil;
 
 /**
@@ -47,11 +41,10 @@ public class JFrameView extends JFrame implements IView {
   private final JButton blueButton;
   private final JButton redButton;
   private final JButton greenButton;
-  private String imageName;
   private final JButton loadButton;
   private final JButton saveButton;
   private final JLabel imageLabel;
-
+  private String imageName;
   private Image displayImage;
 
   private HistogramPanel histogram;
@@ -85,7 +78,6 @@ public class JFrameView extends JFrame implements IView {
     JScrollPane histogramScrollPanel = new JScrollPane(this.histogram);
     histogramScrollPanel.setPreferredSize(new Dimension(275, 300));
     mainPanel.add(histogramScrollPanel);
-
 
     //file open
     JPanel buttonPanel = new JPanel();
@@ -164,7 +156,7 @@ public class JFrameView extends JFrame implements IView {
     loadButton.addActionListener(evt -> {
       final JFileChooser fileChooser = new JFileChooser(".");
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
-              "jpg, png, jpeg, bmp, & ppm", "jpg", "png", "ppm", "jpeg", "bmp");
+          "jpg, png, jpeg, bmp, & ppm", "jpg", "png", "ppm", "jpeg", "bmp");
       fileChooser.setFileFilter(filter);
       int retValue = fileChooser.showOpenDialog(this);
       if (retValue == JFileChooser.APPROVE_OPTION) {
@@ -181,7 +173,7 @@ public class JFrameView extends JFrame implements IView {
     saveButton.addActionListener(evt -> {
       final JFileChooser fileChooser = new JFileChooser(".");
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
-              "jpg, png, & ppm", "jpg", "png", "ppm");
+          "jpg, png, & ppm", "jpg", "png", "ppm");
       fileChooser.setFileFilter(filter);
       int retValue = fileChooser.showSaveDialog(this);
       if (retValue == JFileChooser.APPROVE_OPTION) {

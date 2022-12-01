@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class represents an implementation of the Image processing model, utilizing a hashMap to
- * map given inputted image names to image objects.
+ * This class represents an implementation of the Image processing model, utilizing a hashMap to map
+ * given inputted image names to image objects.
  */
 public class ImageProcessingModelImp implements IImageProcessingModel {
+
   final private Map<String, Image> images;
 
   /**
@@ -82,7 +83,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
 
   @Override
   public void brightenImage(int increment, String name, String destName)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     if (this.images.get(name) == null) {
       throw new IllegalArgumentException("No image " + name + " found.");
     }
@@ -102,7 +103,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
 
   @Override
   public void darkenImage(int increment, String name, String destName)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     if (this.images.get(name) == null) {
       throw new IllegalArgumentException("No image " + name + " found.");
     }
@@ -193,8 +194,8 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     int[][][] greyscaleImage = new int[image.getHeight()][image.getWidth()][3];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        int lumaVal = clampInt(image, (int) (0.2126 * image.getRed(i, j)
-                + 0.7152 * image.getGreen(i, j)
+        int lumaVal = clampInt(image,
+            (int) (0.2126 * image.getRed(i, j) + 0.7152 * image.getGreen(i, j)
                 + 0.0722 * image.getBlue(i, j)));
         greyscaleImage[i][j][0] = lumaVal;
         greyscaleImage[i][j][1] = lumaVal;
@@ -215,8 +216,8 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     int[][][] greyscaleImage = new int[image.getHeight()][image.getWidth()][3];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        int intensityVal = clampInt(image, (image.getRed(i, j) + image.getGreen(i, j)
-                + image.getBlue(i, j)) / 3);
+        int intensityVal = clampInt(image,
+            (image.getRed(i, j) + image.getGreen(i, j) + image.getBlue(i, j)) / 3);
         greyscaleImage[i][j][0] = intensityVal;
         greyscaleImage[i][j][1] = intensityVal;
         greyscaleImage[i][j][2] = intensityVal;
@@ -236,8 +237,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     int[][][] greyscaleImage = new int[image.getHeight()][image.getWidth()][3];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        int[] tempArray = {image.getRed(i, j), image.getGreen(i, j),
-                image.getBlue(i, j)};
+        int[] tempArray = {image.getRed(i, j), image.getGreen(i, j), image.getBlue(i, j)};
         int maxVal = tempArray[0];
         for (int v : tempArray) {
           if (v > maxVal) {
@@ -261,7 +261,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     }
     Image image = this.images.get(name);
     double[][] blurFilter = {{1.0 / 16, 1.0 / 8, 1.0 / 16}, {1.0 / 8, 1.0 / 4, 1.0 / 8},
-                                {1.0 / 16, 1.0 / 8, 1.0 / 16}};
+        {1.0 / 16, 1.0 / 8, 1.0 / 16}};
     this.images.put(destName, applyFilter(image, blurFilter));
     System.out.println("Blurred image created");
   }
@@ -273,10 +273,10 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     }
     Image image = this.images.get(name);
     double[][] sharpenFilter = {{-1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8},
-                                {-1.0 / 8, 1.0 / 4, 1.0 / 4, 1.0 / 4, -1.0 / 8},
-                                {-1.0 / 8, 1.0 / 4, 1.0, 1.0 / 4, -1.0 / 8},
-                                {-1.0 / 8, 1.0 / 4, 1.0 / 4, 1.0 / 4, -1.0 / 8},
-                                {-1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8}};
+        {-1.0 / 8, 1.0 / 4, 1.0 / 4, 1.0 / 4, -1.0 / 8},
+        {-1.0 / 8, 1.0 / 4, 1.0, 1.0 / 4, -1.0 / 8},
+        {-1.0 / 8, 1.0 / 4, 1.0 / 4, 1.0 / 4, -1.0 / 8},
+        {-1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8, -1.0 / 8}};
     this.images.put(destName, applyFilter(image, sharpenFilter));
     System.out.println("Sharpened image created");
   }
@@ -288,7 +288,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     }
     Image image = this.images.get(name);
     double[][] grayscaleTransform = {{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722},
-                                     {0.2126, 0.7152, 0.0722}};
+        {0.2126, 0.7152, 0.0722}};
     this.images.put(destName, applyTransform(image, grayscaleTransform));
     System.out.println("Grayscale image created");
   }
@@ -300,7 +300,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     }
     Image image = this.images.get(name);
     double[][] sepiaTransform = {{0.393, 0.769, 0.189}, {0.349, 0.686, 0.168},
-                                 {0.272, 0.534, 0.131}};
+        {0.272, 0.534, 0.131}};
     this.images.put(destName, applyTransform(image, sepiaTransform));
     System.out.println("Sepia image created");
   }
@@ -365,10 +365,10 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         for (int channel = 0; channel < 3; channel++) {
-          transformedImage[i][j][channel] = clampInt(image, (int) (image.getRed(i, j)
-                  * transform[channel][0] +
-                  image.getGreen(i, j) * transform[channel][1] + image.getBlue(i, j)
-                  * transform[channel][2]));
+          transformedImage[i][j][channel] = clampInt(image,
+              (int) (image.getRed(i, j) * transform[channel][0]
+                  + image.getGreen(i, j) * transform[channel][1]
+                  + image.getBlue(i, j) * transform[channel][2]));
         }
       }
     }
@@ -392,11 +392,11 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     int[] intensityPixels = new int[256];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        int intensityVal = clampInt(image, (image.getRed(i, j) + image.getGreen(i, j)
-                + image.getBlue(i, j)) / 3);
-        redPixels[image.getRed(i,j)] += 1;
-        greenPixels[image.getGreen(i,j)] += 1;
-        bluePixels[image.getBlue(i,j)] += 1;
+        int intensityVal = clampInt(image,
+            (image.getRed(i, j) + image.getGreen(i, j) + image.getBlue(i, j)) / 3);
+        redPixels[image.getRed(i, j)] += 1;
+        greenPixels[image.getGreen(i, j)] += 1;
+        bluePixels[image.getBlue(i, j)] += 1;
         intensityPixels[intensityVal] += 1;
       }
     }

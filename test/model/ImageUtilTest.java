@@ -1,10 +1,9 @@
 package model;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * Test class for Image Util.

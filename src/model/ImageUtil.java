@@ -1,8 +1,5 @@
 package model;
 
-import javax.imageio.ImageIO;
-
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -110,6 +108,7 @@ public class ImageUtil {
 
   /**
    * Takes in a image and reads it into an array.
+   *
    * @param filename The name of the file.
    * @return an imageArray of the photo.
    */
@@ -143,8 +142,8 @@ public class ImageUtil {
   }
 
   /**
-   * Takes an image and creates a file of image at given path location.
-   * File type is determined by the extension.
+   * Takes an image and creates a file of image at given path location. File type is determined by
+   * the extension.
    *
    * @param image given image object
    * @param path  designation path location
@@ -166,18 +165,19 @@ public class ImageUtil {
 
   /**
    * Buffers and image.
+   *
    * @param image the photo passed in.
    * @return the buffered image.
    */
   public static BufferedImage imageToImage(Image image) {
 
     BufferedImage bImage = new BufferedImage(image.getWidth(), image.getHeight(),
-            BufferedImage.TYPE_INT_RGB);
+        BufferedImage.TYPE_INT_RGB);
 
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         Color currentPixel = new Color(image.getRed(i, j), image.getGreen(i, j),
-                image.getBlue(i, j));
+            image.getBlue(i, j));
 
         bImage.setRGB(j, i, currentPixel.getRGB());
       }

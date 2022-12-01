@@ -1,13 +1,5 @@
 package controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.function.Function;
-
 import controller.commands.BlueComponent;
 import controller.commands.Blur;
 import controller.commands.Brighten;
@@ -24,6 +16,13 @@ import controller.commands.Sepia;
 import controller.commands.Sharpen;
 import controller.commands.ValueComponent;
 import controller.commands.Vertical;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.function.Function;
 import model.IImageProcessingModel;
 import view.Features;
 import view.IView;
@@ -32,6 +31,7 @@ import view.IView;
  * Controller class that runs the Image processing program and takes in user input.
  */
 public class ImageProcessingControllerImp implements ImageProcessingController, Features {
+
   private final IImageProcessingModel model;
   private final Readable readable;
 
@@ -76,8 +76,8 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     knownCommands.put("blue-component", (Scanner s) -> new BlueComponent(s.next(), s.next()));
     knownCommands.put("value-component", (Scanner s) -> new ValueComponent(s.next(), s.next()));
     knownCommands.put("luma-component", (Scanner s) -> new LumaComponent(s.next(), s.next()));
-    knownCommands.put("intensity-component", (Scanner s) -> new IntensityComponent(s.next(),
-            s.next()));
+    knownCommands.put("intensity-component",
+        (Scanner s) -> new IntensityComponent(s.next(), s.next()));
     knownCommands.put("blur", (Scanner s) -> new Blur(s.next(), s.next()));
     knownCommands.put("sharpen", (Scanner s) -> new Sharpen(s.next(), s.next()));
     knownCommands.put("grayscale", (Scanner s) -> new Grayscale(s.next(), s.next()));
@@ -100,7 +100,7 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
           builder.append(scan.nextLine()).append(System.lineSeparator());
 
           new ImageProcessingControllerImp(this.model, new StringReader(builder.toString()),
-                  this.view).run();
+              this.view).run();
           this.quit();
           return;
         } catch (IOException e) {

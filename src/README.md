@@ -1,17 +1,16 @@
 Image Processing Program
 
-This project utilizes the MVC design to create a PPM image processing program.
-Below will be an in-depth explanation of the program.
+This project utilizes the MVC design to create a PPM image processing program. Below will be an
+in-depth explanation of the program.
 
 Summary of Changes:
 
-* We changed the way our ImageProcessingController by taking out the run method 
-  and having that throw the IOExeption. We did this because it made it easier to test. 
-We also updated Implementation to handle all of the commands properly and 
-run multiple commands in order.
+* We changed the way our ImageProcessingController by taking out the run method and having that
+  throw the IOExeption. We did this because it made it easier to test. We also updated
+  Implementation to handle all of the commands properly and run multiple commands in order.
 
-* We stopped trying to hand a single image and a group of images to ImageProcessingModelImp. We now just handit a Hashmap of images.
-
+* We stopped trying to hand a single image and a group of images to ImageProcessingModelImp. We now
+  just handit a Hashmap of images.
 
 Model:
 
@@ -22,24 +21,21 @@ The model consists of three classes and one interface.
   offers various different states of the program, which are essentially operations for image
   processing.
     * loadImage: given a file path and an image name, loads an image file to create an image and
-      maps
-      the image name to the created image. Throws exception if unable to create image from file.
+      maps the image name to the created image. Throws exception if unable to create image from
+      file.
     * saveImage: given a path and an image name, gets image mapped to image name to save to file
-      path.
-      Throws exception if no image name exists in program.
+      path. Throws exception if no image name exists in program.
     * Horizontal and Vertical transitions: given image name and destination image name, gets image
       mapped to designated image name and performs corresponding transition, storing (or mapping)
-      new
-      modified image
-      to the destination image name. Throws exception if no image name exists in program.
+      new modified image to the destination image name. Throws exception if no image name exists in
+      program.
     * greyscale components (red, green, blue, luma, intensity, value): given image name and
       destination image name, gets image mapped to given name and creates a greyscale image based on
       corresponding component, storing (or mapping) new modified image to destination image name.
       Throws exception if no image name exists in program.
-* The ImageProcessingModelImp represents an implementation of the image processing model.
-  The implementation contains two private fields, an Image to represent the active processing image
-  and a Hashmap to store Images to image names (string values). The constructor of this
-  implementation
+* The ImageProcessingModelImp represents an implementation of the image processing model. The
+  implementation contains two private fields, an Image to represent the active processing image and
+  a Hashmap to store Images to image names (string values). The constructor of this implementation
   initializes the map to an empty hashMap.
 
 * The Image class represents an image object. For readability purposes, each array of integers in
@@ -51,8 +47,7 @@ The model consists of three classes and one interface.
         * the maximum value of the RGB components in each pixel of the image.
     * The Image class contains the methods getHeight, getWidth, getMaxValue to access the values of
       its private fields. Additionally, the getRed, getGreen, and getBlue methods return the
-      corresponding
-      RGB components based on the pixel location in the image.
+      corresponding RGB components based on the pixel location in the image.
 * The ImageUtil class is simply a utility class to read a PPM image from file and create image
   object, as well as creating a file from an image object.
     * The readFile method reads a file at a file path and creates an image object accordingly. The
@@ -83,38 +78,31 @@ The controller consists of 12 classes and one interface.
     * The BlueComponent class command runs the blueComponent method from the model on user input.
     * The GreenComponent class command runs the greenComponent method from the model on user input.
     * The RedComponent class command runs the redComponent method from the model on user input.
-  
 
 Script to be executed:
-#load Kindred.ppm and call it 'kindred'
-load src/Kindred.ppm kindred
+#load Kindred.ppm and call it 'kindred' load src/Kindred.ppm kindred
 
 #brighten kindred by adding 10  
 brighten 10 kindred kindred-brighter
 
-#flip kindred vertically
-vertical-flip kindred kindred-vertical
+#flip kindred vertically vertical-flip kindred kindred-vertical
 
-#flip the vertically flipped kindred horizontally
-horizontal-flip kindred-vertical kindred-vertical-horizontal
+#flip the vertically flipped kindred horizontally horizontal-flip kindred-vertical
+kindred-vertical-horizontal
 
-#create a greyscale using only the value component, as an image kindred-greyscale
-value-component kindred kindred-greyscale
+#create a greyscale using only the value component, as an image kindred-greyscale value-component
+kindred kindred-greyscale
 
-#save kindred-brighter
-save src/kindred-brighter.ppm kindred-brighter
+#save kindred-brighter save src/kindred-brighter.ppm kindred-brighter
 
-#save kindred-greyscale
-save src/kindredValue.ppm kindred-value
+#save kindred-greyscale save src/kindredValue.ppm kindred-value
 
-#overwrite kindred with another file
-load src/kindredValue.ppm kindred
+#overwrite kindred with another file load src/kindredValue.ppm kindred
 
 Class diagram:
 
 see 'src/diagram.png'
 
 Source: The "Kindred.ppm" image used for this source was taken by me, Fernando Garcia, and I
-authorize the
-image's use for this project.
+authorize the image's use for this project.
   

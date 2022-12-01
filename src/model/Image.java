@@ -3,10 +3,11 @@ package model;
 import java.util.Objects;
 
 /**
- * This class represents an Image object. For readability purposes, each array of integers in the
- * 3d array is representative of the RGB components of a pixel in the image.
+ * This class represents an Image object. For readability purposes, each array of integers in the 3d
+ * array is representative of the RGB components of a pixel in the image.
  */
 public class Image {
+
   private final int[][][] image;
   private final int height;
   private final int width;
@@ -29,8 +30,8 @@ public class Image {
 
 
   /**
-   * Get integer value of the red component of pixel in the given location of the image's
-   * 3d array representation.
+   * Get integer value of the red component of pixel in the given location of the image's 3d array
+   * representation.
    *
    * @param height height location of pixel
    * @param width  width location of pixel
@@ -41,8 +42,8 @@ public class Image {
   }
 
   /**
-   * Get integer value of the green component of pixel in the given location of the image's
-   * 3d array representation.
+   * Get integer value of the green component of pixel in the given location of the image's 3d array
+   * representation.
    *
    * @param height height location of pixel
    * @param width  width location of pixel
@@ -53,8 +54,8 @@ public class Image {
   }
 
   /**
-   * Get integer value of the blue component of pixel in the given location of the image's
-   * 3d array representation.
+   * Get integer value of the blue component of pixel in the given location of the image's 3d array
+   * representation.
    *
    * @param height height location of pixel
    * @param width  width location of pixel
@@ -105,10 +106,8 @@ public class Image {
       return false;
     }
     Image other = (Image) o;
-    return this.maxValue == other.maxValue
-            && this.image == other.image
-            && this.height == other.height
-            && this.width == other.width;
+    return this.maxValue == other.maxValue && this.image == other.image
+        && this.height == other.height && this.width == other.width;
   }
 
   @Override

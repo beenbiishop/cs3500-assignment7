@@ -1,18 +1,18 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 /**
  * Class for Histogram Panel to display histogram.
  */
 public class HistogramPanel extends JPanel {
+
   private List<int[]> histogram;
 
   /**
@@ -33,15 +33,6 @@ public class HistogramPanel extends JPanel {
   }
 
   /**
-   * Set list of histogram arrays to given list.
-   *
-   * @param histogram list of integer arrays.
-   */
-  public void setHistogram(List<int[]> histogram) {
-    this.histogram = histogram;
-  }
-
-  /**
    * Gets histogram list of arrays.
    *
    * @return histogram list of arrays.
@@ -50,17 +41,24 @@ public class HistogramPanel extends JPanel {
     return this.histogram;
   }
 
+  /**
+   * Set list of histogram arrays to given list.
+   *
+   * @param histogram list of integer arrays.
+   */
+  public void setHistogram(List<int[]> histogram) {
+    this.histogram = histogram;
+  }
+
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
 
-
     AffineTransform originalTransform = g2d.getTransform();
 
     g2d.translate(0, this.getPreferredSize().getHeight());
     g2d.scale(1, -1);
-
 
     for (int i = 0; i < this.histogram.get(0).length; i++) {
       g2d.setColor(new Color(255, 0, 0, 150));

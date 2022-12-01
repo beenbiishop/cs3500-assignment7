@@ -6,6 +6,7 @@ import java.io.IOException;
  * The interface for the features.
  */
 public interface Features {
+
   void load(String filePath, String fileName) throws IOException;
 
   void save(String filePath, String fileName) throws IOException;

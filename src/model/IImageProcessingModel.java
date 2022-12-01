@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This is an interface that represents the operations offered by the Image Processing model.
- * An object of the model represents an Image processing program.
+ * This is an interface that represents the operations offered by the Image Processing model. An
+ * object of the model represents an Image processing program.
  */
 public interface IImageProcessingModel {
 
@@ -40,8 +40,8 @@ public interface IImageProcessingModel {
   void transformHorizontal(String name, String destName) throws IllegalArgumentException;
 
   /**
-   * Transforms the image corresponding to the inputted name to a vertically flipped version and
-   * * stores the image to the given destination name.
+   * Transforms the image corresponding to the inputted name to a vertically flipped version and *
+   * stores the image to the given destination name.
    *
    * @param name     Path to the save location.
    * @param destName name of the new image after it has been stretched.
@@ -61,8 +61,8 @@ public interface IImageProcessingModel {
   void brightenImage(int increment, String name, String destName) throws IllegalArgumentException;
 
   /**
-   * Darkens an image corresponding to the given name by the given increment and stores the image
-   * to the given destination name.
+   * Darkens an image corresponding to the given name by the given increment and stores the image to
+   * the given destination name.
    *
    * @param increment the amount the image should be darkened.
    * @param name      the name of the image you want to be brightened.
@@ -103,8 +103,8 @@ public interface IImageProcessingModel {
   void blueComponent(String name, String destName) throws IllegalArgumentException;
 
   /**
-   * Produces the greyscale version of the image with the RGB value being the luma value
-   * for each pixel.
+   * Produces the greyscale version of the image with the RGB value being the luma value for each
+   * pixel.
    *
    * @param name     the name of the image you want changed.
    * @param destName the name of the new image after it has been changed.
@@ -113,8 +113,8 @@ public interface IImageProcessingModel {
   void lumaComponent(String name, String destName) throws IllegalArgumentException;
 
   /**
-   * Produces the greyscale version of the image with the RGB value being the intensity value
-   * for each pixel, which is calculated as the average of the three components for each pixel.
+   * Produces the greyscale version of the image with the RGB value being the intensity value for
+   * each pixel, which is calculated as the average of the three components for each pixel.
    *
    * @param name     the name of the image you want changed.
    * @param destName the name of the new image after it has been changed.
@@ -168,11 +168,12 @@ public interface IImageProcessingModel {
    */
   void sepiaImage(String name, String destName) throws IllegalArgumentException;
 
-  Map<String,Image> getImages();
+  Map<String, Image> getImages();
 
   /**
    * Takes name, finds image stored to name and returns histogram list of integer arrays for its
    * components.
+   *
    * @param name name of image to create histogram.
    * @return histogram list of integer arrays.
    */
