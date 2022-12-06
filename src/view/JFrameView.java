@@ -43,7 +43,7 @@ public class JFrameView extends JFrame implements IView {
   private final JButton greenButton;
   private final JButton loadButton;
   private final JButton saveButton;
-  // TODO: Remove this button
+  // TODO: Note added field
   private final JButton mosaicButton;
   private final JLabel imageLabel;
   private String imageName;
@@ -149,7 +149,7 @@ public class JFrameView extends JFrame implements IView {
     valueButton.setActionCommand("Value");
     buttonPanel.add(valueButton);
 
-    // TODO: remove this code
+    // TODO: note added button
     mosaicButton = new JButton("Mosaic");
     mosaicButton.setActionCommand("Mosaic");
     buttonPanel.add(mosaicButton);

@@ -25,15 +25,18 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 import model.IImageProcessingModel;
-import view.Features;
+import model.IMosaicImageProcessingModel;
 import view.IView;
+import view.MosaicFeatures;
 
 /**
  * Controller class that runs the Image processing program and takes in user input.
  */
-public class ImageProcessingControllerImp implements ImageProcessingController, Features {
+// TODO: Confirm change of features interface
+public class ImageProcessingControllerImp implements ImageProcessingController, MosaicFeatures {
 
   private final IImageProcessingModel model;
+
   private final Readable readable;
 
   private final IView view;
@@ -53,6 +56,22 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     this.readable = readable;
     this.view = view;
 
+  }
+
+  // TODO: is this the right approach?
+
+  /**
+   * Constructs a new controller for the GUI that supports mosaic.
+   *
+   * @param model    the mosaic model to use
+   * @param readable the readable to read from
+   * @param view     the view to display on
+   */
+  public ImageProcessingControllerImp(IMosaicImageProcessingModel model, Readable readable,
+      IView view) {
+    this.model = model;
+    this.readable = readable;
+    this.view = view;
   }
 
   /**
@@ -83,7 +102,7 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     knownCommands.put("sharpen", (Scanner s) -> new Sharpen(s.next(), s.next()));
     knownCommands.put("grayscale", (Scanner s) -> new Grayscale(s.next(), s.next()));
     knownCommands.put("sepia", (Scanner s) -> new Sepia(s.next(), s.next()));
-    // TODO: don't modify this file directly & remove this command
+    // TODO: document this change
     knownCommands.put("mosaic", (Scanner s) -> new Mosaic(s.next(), s.next(), s.nextInt()));
     while (scan.hasNext()) {
       ImageProcessingCommand c;
@@ -236,12 +255,17 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     this.view.quit();
   }
 
-  // TODO: remove this method to not modify the source code
+  // TODO: document this change and confirm that it is correct
   @Override
   public void mosaic(String imageName, String destName, int seeds) {
-    this.model.mosaicImage(imageName, destName, seeds);
-    this.view.setHistogram(this.model.histogramList(destName));
-    this.view.refresh(this.model.getImages().get(destName));
+    if (this.model instanceof IMosaicImageProcessingModel) {
+      IMosaicImageProcessingModel mosaicModel = (IMosaicImageProcessingModel) this.model;
+      mosaicModel.mosaicImage(imageName, destName, seeds);
+      this.view.setHistogram(this.model.histogramList(destName));
+      this.view.refresh(this.model.getImages().get(destName));
+    } else {
+      throw new IllegalStateException("Mosaic not supported by this controller's model.");
+    }
   }
 
 }

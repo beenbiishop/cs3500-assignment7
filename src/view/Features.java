@@ -41,16 +41,4 @@ public interface Features {
 
   void quit();
 
-  // TODO: remove this method to not modify the source code
-
-  /**
-   * This method is used to handle the event when the user applies a mosaic filter.
-   *
-   * @param imageName the name of the image to apply mosaic filter.
-   * @param destName  the name of the image after applying mosaic filter.
-   * @param seeds     the number of seeds to apply mosaic filter.
-   */
-  void mosaic(String imageName, String destName, int seeds);
-
-
 }

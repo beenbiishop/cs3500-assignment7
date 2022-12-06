@@ -3,6 +3,7 @@ package controller.commands;
 import controller.ImageProcessingCommand;
 import java.io.IOException;
 import model.IImageProcessingModel;
+import model.IMosaicImageProcessingModel;
 
 public class Mosaic implements ImageProcessingCommand {
 

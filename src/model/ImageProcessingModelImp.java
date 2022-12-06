@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * This class represents an implementation of the Image processing model, utilizing a hashMap to map
@@ -408,53 +407,4 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     return histogram;
   }
 
-  // TODO: Fix this method so result looks like the example in the assignment.
-  // TODO: Is there really no way of transmitting errors to the user? We should probably be
-  //  checking if a positive integer is given for numSeeds.
-  @Override
-  public void mosaicImage(String name, String destName, int numSeeds)
-      throws IllegalArgumentException {
-    if (this.images.get(name) == null) {
-      throw new IllegalArgumentException("No image " + name + " found.");
-    }
-    Image image = this.images.get(name);
-    int width = image.getWidth();
-    int height = image.getHeight();
-    int[][][] mosaicImage = new int[height][width][3];
-
-    // generate seeds
-    Random random = new Random();
-    List<int[]> seeds = new ArrayList<>();
-    for (int i = 0; i < numSeeds; i++) {
-      int[] seed = new int[2];
-      seed[0] = random.nextInt(height);
-      seed[1] = random.nextInt(width);
-      seeds.add(seed);
-    }
-
-    // set each pixel to the color of the closest seed
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        int[] closestSeed = seeds.get(0);
-        int closestSeedDist = Integer.MAX_VALUE;
-        for (int[] seed : seeds) {
-          int yDist = Math.abs(seed[0] - i);
-          int xDist = Math.abs(seed[1] - j);
-          int seedDist = yDist + xDist;
-          if (seedDist < closestSeedDist) {
-            closestSeed = seed;
-            closestSeedDist = seedDist;
-          }
-        }
-        mosaicImage[i][j][0] = image.getRed(closestSeed[0], closestSeed[1]);
-        mosaicImage[i][j][1] = image.getGreen(closestSeed[0], closestSeed[1]);
-        mosaicImage[i][j][2] = image.getBlue(closestSeed[0], closestSeed[1]);
-      }
-    }
-
-    // store the new image
-    this.images.put(destName, new Image(mosaicImage, image.getMaxValue()));
-    System.out.println("Mosaic created");
-
-  }
 }
