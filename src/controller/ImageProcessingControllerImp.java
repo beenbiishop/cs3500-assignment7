@@ -83,8 +83,7 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     knownCommands.put("sharpen", (Scanner s) -> new Sharpen(s.next(), s.next()));
     knownCommands.put("grayscale", (Scanner s) -> new Grayscale(s.next(), s.next()));
     knownCommands.put("sepia", (Scanner s) -> new Sepia(s.next(), s.next()));
-    // TODO: don't modify this file directly & remove this command
-    knownCommands.put("mosaic", (Scanner s) -> new Mosaic(s.next(), s.next(), s.nextInt()));
+    knownCommands.put("mosaic", (Scanner s) -> new Mosaic(s.nextInt()));
     while (scan.hasNext()) {
       ImageProcessingCommand c;
       String in = scan.next();
@@ -234,14 +233,6 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
   @Override
   public void quit() {
     this.view.quit();
-  }
-
-  // TODO: remove this method to not modify the source code
-  @Override
-  public void mosaic(String imageName, String destName, int seeds) {
-    this.model.mosaicImage(imageName, destName, seeds);
-    this.view.setHistogram(this.model.histogramList(destName));
-    this.view.refresh(this.model.getImages().get(destName));
   }
 
 }

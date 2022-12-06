@@ -409,41 +409,32 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
   }
 
   // TODO: Fix this method so result looks like the example in the assignment.
-  // TODO: Is there really no way of transmitting errors to the user? We should probably be
-  //  checking if a positive integer is given for numSeeds.
   @Override
   public void mosaicImage(String name, String destName, int numSeeds)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     if (this.images.get(name) == null) {
       throw new IllegalArgumentException("No image " + name + " found.");
     }
     Image image = this.images.get(name);
-    int width = image.getWidth();
-    int height = image.getHeight();
-    int[][][] mosaicImage = new int[height][width][3];
-
-    // generate seeds
-    Random random = new Random();
-    List<int[]> seeds = new ArrayList<>();
+    int[][][] mosaicImage = new int[image.getHeight()][image.getWidth()][3];
+    Random rand = new Random();
+    ArrayList<int[]> seeds = new ArrayList<>();
     for (int i = 0; i < numSeeds; i++) {
-      int[] seed = new int[2];
-      seed[0] = random.nextInt(height);
-      seed[1] = random.nextInt(width);
+      int[] seed = new int[3];
+      seed[0] = rand.nextInt(image.getHeight());
+      seed[1] = rand.nextInt(image.getWidth());
+      seed[2] = rand.nextInt(3);
       seeds.add(seed);
     }
-
-    // set each pixel to the color of the closest seed
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
+    for (int i = 0; i < image.getHeight(); i++) {
+      for (int j = 0; j < image.getWidth(); j++) {
         int[] closestSeed = seeds.get(0);
-        int closestSeedDist = Integer.MAX_VALUE;
+        int closestSeedDistance = Integer.MAX_VALUE;
         for (int[] seed : seeds) {
-          int yDist = Math.abs(seed[0] - i);
-          int xDist = Math.abs(seed[1] - j);
-          int seedDist = yDist + xDist;
-          if (seedDist < closestSeedDist) {
+          int seedDistance = Math.abs(seed[0] - i) + Math.abs(seed[1] - j);
+          if (seedDistance < closestSeedDistance) {
             closestSeed = seed;
-            closestSeedDist = seedDist;
+            closestSeedDistance = seedDistance;
           }
         }
         mosaicImage[i][j][0] = image.getRed(closestSeed[0], closestSeed[1]);
@@ -451,10 +442,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
         mosaicImage[i][j][2] = image.getBlue(closestSeed[0], closestSeed[1]);
       }
     }
-
-    // store the new image
     this.images.put(destName, new Image(mosaicImage, image.getMaxValue()));
-    System.out.println("Mosaic created");
-
   }
+
 }

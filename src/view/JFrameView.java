@@ -43,8 +43,6 @@ public class JFrameView extends JFrame implements IView {
   private final JButton greenButton;
   private final JButton loadButton;
   private final JButton saveButton;
-  // TODO: Remove this button
-  private final JButton mosaicButton;
   private final JLabel imageLabel;
   private String imageName;
   private Image displayImage;
@@ -149,11 +147,6 @@ public class JFrameView extends JFrame implements IView {
     valueButton.setActionCommand("Value");
     buttonPanel.add(valueButton);
 
-    // TODO: remove this code
-    mosaicButton = new JButton("Mosaic");
-    mosaicButton.setActionCommand("Mosaic");
-    buttonPanel.add(mosaicButton);
-
     mainPanel.add(buttonPanel, BorderLayout.SOUTH);
     pack();
   }
@@ -162,8 +155,8 @@ public class JFrameView extends JFrame implements IView {
   public void addFeatures(Features features) {
     loadButton.addActionListener(evt -> {
       final JFileChooser fileChooser = new JFileChooser(".");
-      FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg, png, jpeg, bmp, & ppm",
-          "jpg", "png", "ppm", "jpeg", "bmp");
+      FileNameExtensionFilter filter = new FileNameExtensionFilter(
+          "jpg, png, jpeg, bmp, & ppm", "jpg", "png", "ppm", "jpeg", "bmp");
       fileChooser.setFileFilter(filter);
       int retValue = fileChooser.showOpenDialog(this);
       if (retValue == JFileChooser.APPROVE_OPTION) {
@@ -179,8 +172,8 @@ public class JFrameView extends JFrame implements IView {
     });
     saveButton.addActionListener(evt -> {
       final JFileChooser fileChooser = new JFileChooser(".");
-      FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg, png, & ppm", "jpg", "png",
-          "ppm");
+      FileNameExtensionFilter filter = new FileNameExtensionFilter(
+          "jpg, png, & ppm", "jpg", "png", "ppm");
       fileChooser.setFileFilter(filter);
       int retValue = fileChooser.showSaveDialog(this);
       if (retValue == JFileChooser.APPROVE_OPTION) {
@@ -276,14 +269,6 @@ public class JFrameView extends JFrame implements IView {
     valueButton.addActionListener(evt -> {
       String destName = JOptionPane.showInputDialog(this, "Provide destination name");
       features.value(this.imageName, destName);
-      imageLabel.setIcon(new ImageIcon(displayImage));
-      imageName = destName;
-    });
-    // TODO: Remove this code
-    mosaicButton.addActionListener(evt -> {
-      int seeds = getNumberInput("Input mosaic seed amount.");
-      String destName = JOptionPane.showInputDialog(this, "Provide destination name");
-      features.mosaic(this.imageName, destName, seeds);
       imageLabel.setIcon(new ImageIcon(displayImage));
       imageName = destName;
     });
