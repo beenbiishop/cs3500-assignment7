@@ -1,32 +1,30 @@
 package controller.commands;
 
-import java.io.IOException;
-
 import controller.ImageProcessingCommand;
+import java.io.IOException;
 import model.IImageProcessingModel;
 
 public class Mosaic implements ImageProcessingCommand {
 
-  private int seeds;
+  private final int seeds;
+  private final String name;
+  private final String destName;
 
   /**
-   * Constructor for command to make a mosaic version of an image.
+   * Constructor for command to create a mosaic image by given seeds.
    *
-   * @param seeds     the number of seeds
+   * @param seeds    integer to represent number of seeds.
+   * @param name     name of image to be modified.
+   * @param destName name of modified image.
    */
-  public Mosaic(int seeds) {
+  public Mosaic(String name, String destName, int seeds) {
+    this.name = name;
+    this.destName = destName;
     this.seeds = seeds;
-
   }
 
-  /**
-   * Image processing command that changes the state of the model.
-   *
-   * @param model represents image processing model.
-   * @throws IOException if controller fails to process command.
-   */
   @Override
   public void run(IImageProcessingModel model) throws IOException {
-    model.mosaicImage(this.seeds);
+    model.mosaicImage(this.name, this.destName, this.seeds);
   }
 }
