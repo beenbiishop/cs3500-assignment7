@@ -27,5 +27,4 @@ public class Mosaic implements ImageProcessingCommand {
   public void run(IImageProcessingModel model) throws IOException {
     model.mosaicImage(this.name, this.destName, this.seeds);
   }
-
 }
