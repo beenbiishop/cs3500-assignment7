@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * This class represents an implementation of the Image processing model, utilizing a hashMap to map
@@ -405,6 +406,43 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     histogram.add(bluePixels);
     histogram.add(intensityPixels);
     return histogram;
+  }
+
+  // TODO: Fix this method so result looks like the example in the assignment.
+  @Override
+  public void mosaicImage(String name, String destName, int numSeeds)
+      throws IllegalArgumentException {
+    if (this.images.get(name) == null) {
+      throw new IllegalArgumentException("No image " + name + " found.");
+    }
+    Image image = this.images.get(name);
+    int[][][] mosaicImage = new int[image.getHeight()][image.getWidth()][3];
+    Random rand = new Random();
+    ArrayList<int[]> seeds = new ArrayList<>();
+    for (int i = 0; i < numSeeds; i++) {
+      int[] seed = new int[3];
+      seed[0] = rand.nextInt(image.getHeight());
+      seed[1] = rand.nextInt(image.getWidth());
+      seed[2] = rand.nextInt(3);
+      seeds.add(seed);
+    }
+    for (int i = 0; i < image.getHeight(); i++) {
+      for (int j = 0; j < image.getWidth(); j++) {
+        int[] closestSeed = seeds.get(0);
+        int closestSeedDistance = Integer.MAX_VALUE;
+        for (int[] seed : seeds) {
+          int seedDistance = Math.abs(seed[0] - i) + Math.abs(seed[1] - j);
+          if (seedDistance < closestSeedDistance) {
+            closestSeed = seed;
+            closestSeedDistance = seedDistance;
+          }
+        }
+        mosaicImage[i][j][0] = image.getRed(closestSeed[0], closestSeed[1]);
+        mosaicImage[i][j][1] = image.getGreen(closestSeed[0], closestSeed[1]);
+        mosaicImage[i][j][2] = image.getBlue(closestSeed[0], closestSeed[1]);
+      }
+    }
+    this.images.put(destName, new Image(mosaicImage, image.getMaxValue()));
   }
 
 }

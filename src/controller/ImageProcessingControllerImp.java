@@ -233,4 +233,12 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     this.view.quit();
   }
 
+  // TODO: remove this method to not modify the source code
+  @Override
+  public void mosaic(String imageName, String destName, int seeds) {
+    this.model.mosaicImage(imageName, destName, seeds);
+    this.view.setHistogram(this.model.histogramList(destName));
+    this.view.refresh(this.model.getImages().get(destName));
+  }
+
 }
