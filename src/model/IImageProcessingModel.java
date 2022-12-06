@@ -178,4 +178,7 @@ public interface IImageProcessingModel {
    * @return histogram list of integer arrays.
    */
   List<int[]> histogramList(String name);
+
+  void mosaicImage(int seeds) throws IllegalArgumentException;
+
 }

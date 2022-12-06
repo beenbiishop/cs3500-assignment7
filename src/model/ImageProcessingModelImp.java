@@ -407,4 +407,7 @@ public class ImageProcessingModelImp implements IImageProcessingModel {
     return histogram;
   }
 
+  @Override
+  public void mosaicImage(int seeds) throws IllegalArgumentException {
+  }
 }

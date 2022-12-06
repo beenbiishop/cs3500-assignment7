@@ -10,6 +10,7 @@ import controller.commands.Horizontal;
 import controller.commands.IntensityComponent;
 import controller.commands.Load;
 import controller.commands.LumaComponent;
+import controller.commands.Mosaic;
 import controller.commands.RedComponent;
 import controller.commands.Save;
 import controller.commands.Sepia;
@@ -82,6 +83,7 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     knownCommands.put("sharpen", (Scanner s) -> new Sharpen(s.next(), s.next()));
     knownCommands.put("grayscale", (Scanner s) -> new Grayscale(s.next(), s.next()));
     knownCommands.put("sepia", (Scanner s) -> new Sepia(s.next(), s.next()));
+    knownCommands.put("mosaic", (Scanner s) -> new Mosaic(s.nextInt()));
     while (scan.hasNext()) {
       ImageProcessingCommand c;
       String in = scan.next();
