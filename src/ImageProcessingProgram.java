@@ -3,8 +3,8 @@ import controller.ImageProcessingControllerImp;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import model.IImageProcessingModel;
-import model.ImageProcessingModelImp;
+import model.IMosaicImageProcessingModel;
+import model.MosaicImageProcessingModelImpl;
 import view.IView;
 import view.JFrameView;
 
@@ -20,7 +20,8 @@ public class ImageProcessingProgram {
    * @throws IOException cannot find the photo.
    */
   public static void main(String[] args) throws IOException {
-    IImageProcessingModel model = new ImageProcessingModelImp();
+    // TODO: document change to model type
+    IMosaicImageProcessingModel model = new MosaicImageProcessingModelImpl();
     IView view = new JFrameView();
     Reader in = new InputStreamReader(System.in);
     ImageProcessingController controller = new ImageProcessingControllerImp(model, in, view);

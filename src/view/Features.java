@@ -41,16 +41,15 @@ public interface Features {
 
   void quit();
 
-  // TODO: remove this method to not modify the source code
+  // TODO: Document new method
 
   /**
-   * This method is used to handle the event when the user applies a mosaic filter.
+   * Transforms the given image into a mosaic using the given number of seeds.
    *
-   * @param imageName the name of the image to apply mosaic filter.
-   * @param destName  the name of the image after applying mosaic filter.
-   * @param seeds     the number of seeds to apply mosaic filter.
+   * @param imageName the name of the image to be transformed.
+   * @param destName  the name of the new image after it has been transformed.
+   * @param numSeeds  the number of seeds to use for the mosaic.
    */
-  void mosaic(String imageName, String destName, int seeds);
-
+  void mosaic(String imageName, String destName, int numSeeds);
 
 }

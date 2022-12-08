@@ -20,7 +20,6 @@ public class ImageProcessingModelImpTest {
     assertTrue(m1.getImages().isEmpty());
   }
 
-  // TODO: Test doesn't pass because file path is typed in wrong
   @Test
   public void testLoadImage() {
     IImageProcessingModel m1 = new ImageProcessingModelImp();
@@ -334,4 +333,6 @@ public class ImageProcessingModelImpTest {
       assertEquals("No image error found.", e.getMessage());
     }
   }
+
+  // TODO: Write tests for the mosaic method
 }

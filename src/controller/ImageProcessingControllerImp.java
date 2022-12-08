@@ -24,16 +24,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
-import model.IImageProcessingModel;
+import model.IMosaicImageProcessingModel;
 import view.Features;
 import view.IView;
 
 /**
  * Controller class that runs the Image processing program and takes in user input.
  */
+// TODO: Document change to controller to support mosaics (does not support old model)
 public class ImageProcessingControllerImp implements ImageProcessingController, Features {
 
-  private final IImageProcessingModel model;
+  // TODO: Document change of this field type
+  private final IMosaicImageProcessingModel model;
+
   private final Readable readable;
 
   private final IView view;
@@ -45,7 +48,9 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
    * @param readable The readable fields to create the image.
    * @param view     the window to put image in.
    */
-  public ImageProcessingControllerImp(IImageProcessingModel model, Readable readable, IView view) {
+  // TODO: Document change of model parameter type
+  public ImageProcessingControllerImp(IMosaicImageProcessingModel model, Readable readable,
+      IView view) {
     if (model == null || readable == null || view == null) {
       throw new IllegalArgumentException("Null value input.");
     }
@@ -83,8 +88,6 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     knownCommands.put("sharpen", (Scanner s) -> new Sharpen(s.next(), s.next()));
     knownCommands.put("grayscale", (Scanner s) -> new Grayscale(s.next(), s.next()));
     knownCommands.put("sepia", (Scanner s) -> new Sepia(s.next(), s.next()));
-    // TODO: don't modify this file directly & remove this command
-    knownCommands.put("mosaic", (Scanner s) -> new Mosaic(s.next(), s.next(), s.nextInt()));
     while (scan.hasNext()) {
       ImageProcessingCommand c;
       String in = scan.next();
@@ -110,7 +113,10 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
           throw new IOException(e.getMessage());
         }
       }
-      if (cmd == null) {
+      if (in.equalsIgnoreCase("mosaic")) { // TODO: document addition of mosaic support
+        MosaicImageProcessingCommand mos = new Mosaic(scan.next(), scan.next(), scan.nextInt());
+        mos.run(this.model);
+      } else if (cmd == null) {
         throw new IllegalArgumentException("Unknown command.");
       } else {
         c = cmd.apply(scan);
@@ -236,7 +242,7 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     this.view.quit();
   }
 
-  // TODO: remove this method to not modify the source code
+  // TODO: document addition of this method
   @Override
   public void mosaic(String imageName, String destName, int seeds) {
     this.model.mosaicImage(imageName, destName, seeds);

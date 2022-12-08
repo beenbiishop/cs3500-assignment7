@@ -43,7 +43,7 @@ public class JFrameView extends JFrame implements IView {
   private final JButton greenButton;
   private final JButton loadButton;
   private final JButton saveButton;
-  // TODO: Remove this button
+  // TODO: Document new button field
   private final JButton mosaicButton;
   private final JLabel imageLabel;
   private String imageName;
@@ -149,7 +149,7 @@ public class JFrameView extends JFrame implements IView {
     valueButton.setActionCommand("Value");
     buttonPanel.add(valueButton);
 
-    // TODO: remove this code
+    // TODO: Document modification of constructor for new button
     mosaicButton = new JButton("Mosaic");
     mosaicButton.setActionCommand("Mosaic");
     buttonPanel.add(mosaicButton);
@@ -279,7 +279,7 @@ public class JFrameView extends JFrame implements IView {
       imageLabel.setIcon(new ImageIcon(displayImage));
       imageName = destName;
     });
-    // TODO: Remove this code
+    // TODO: Document modification of this method to support mosaic
     mosaicButton.addActionListener(evt -> {
       int seeds = getNumberInput("Input mosaic seed amount.");
       String destName = JOptionPane.showInputDialog(this, "Provide destination name");

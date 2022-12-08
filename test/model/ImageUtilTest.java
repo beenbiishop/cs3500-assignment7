@@ -17,7 +17,6 @@ public class ImageUtilTest {
     assertEquals(i1, i2);
   }
 
-  // TODO: wrong file path again
   @Test
   public void testMakeFilePPM() throws IOException {
     Image i1 = ImageUtil.readImage("src/Kindred.ppm");
@@ -26,7 +25,6 @@ public class ImageUtilTest {
     assertEquals(i1, i2);
   }
 
-  // TODO: wrong file path again
   @Test
   public void testMakeFilePPMInvalid() {
     Image i1 = ImageUtil.readImage("src/Kindred.ppm");

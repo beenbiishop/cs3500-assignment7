@@ -1,10 +1,14 @@
 package controller.commands;
 
-import controller.ImageProcessingCommand;
+import controller.MosaicImageProcessingCommand;
 import java.io.IOException;
 import model.IImageProcessingModel;
+import model.IMosaicImageProcessingModel;
 
-public class Mosaic implements ImageProcessingCommand {
+/**
+ * Represents a command to mosaic an image.
+ */
+public class Mosaic implements MosaicImageProcessingCommand {
 
   private final int seeds;
   private final String name;
@@ -24,7 +28,7 @@ public class Mosaic implements ImageProcessingCommand {
   }
 
   @Override
-  public void run(IImageProcessingModel model) throws IOException {
+  public void run(IMosaicImageProcessingModel model) throws IllegalArgumentException {
     model.mosaicImage(this.name, this.destName, this.seeds);
   }
 }
