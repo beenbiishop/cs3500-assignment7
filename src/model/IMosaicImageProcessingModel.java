@@ -3,6 +3,7 @@ package model;
 /**
  * Represents the interface for an image processing model that supports the mosaic filter.
  */
+// TODO: Document creation of this interface
 public interface IMosaicImageProcessingModel extends IImageProcessingModel {
 
   /**

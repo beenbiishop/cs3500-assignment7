@@ -24,18 +24,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
-import model.IImageProcessingModel;
 import model.IMosaicImageProcessingModel;
+import view.Features;
 import view.IView;
-import view.MosaicFeatures;
 
 /**
  * Controller class that runs the Image processing program and takes in user input.
  */
-// TODO: Confirm change of features interface
-public class ImageProcessingControllerImp implements ImageProcessingController, MosaicFeatures {
+// TODO: Document change to controller to support mosaics (does not support old model)
+public class ImageProcessingControllerImp implements ImageProcessingController, Features {
 
-  private final IImageProcessingModel model;
+  // TODO: Document change of this field type
+  private final IMosaicImageProcessingModel model;
 
   private final Readable readable;
 
@@ -48,7 +48,9 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
    * @param readable The readable fields to create the image.
    * @param view     the window to put image in.
    */
-  public ImageProcessingControllerImp(IImageProcessingModel model, Readable readable, IView view) {
+  // TODO: Document change of model parameter type
+  public ImageProcessingControllerImp(IMosaicImageProcessingModel model, Readable readable,
+      IView view) {
     if (model == null || readable == null || view == null) {
       throw new IllegalArgumentException("Null value input.");
     }
@@ -56,22 +58,6 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     this.readable = readable;
     this.view = view;
 
-  }
-
-  // TODO: is this the right approach?
-
-  /**
-   * Constructs a new controller for the GUI that supports mosaic.
-   *
-   * @param model    the mosaic model to use
-   * @param readable the readable to read from
-   * @param view     the view to display on
-   */
-  public ImageProcessingControllerImp(IMosaicImageProcessingModel model, Readable readable,
-      IView view) {
-    this.model = model;
-    this.readable = readable;
-    this.view = view;
   }
 
   /**
@@ -102,8 +88,6 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     knownCommands.put("sharpen", (Scanner s) -> new Sharpen(s.next(), s.next()));
     knownCommands.put("grayscale", (Scanner s) -> new Grayscale(s.next(), s.next()));
     knownCommands.put("sepia", (Scanner s) -> new Sepia(s.next(), s.next()));
-    // TODO: document this change
-    knownCommands.put("mosaic", (Scanner s) -> new Mosaic(s.next(), s.next(), s.nextInt()));
     while (scan.hasNext()) {
       ImageProcessingCommand c;
       String in = scan.next();
@@ -129,7 +113,10 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
           throw new IOException(e.getMessage());
         }
       }
-      if (cmd == null) {
+      if (in.equalsIgnoreCase("mosaic")) { // TODO: document addition of mosaic support
+        MosaicImageProcessingCommand mos = new Mosaic(scan.next(), scan.next(), scan.nextInt());
+        mos.run(this.model);
+      } else if (cmd == null) {
         throw new IllegalArgumentException("Unknown command.");
       } else {
         c = cmd.apply(scan);
@@ -255,17 +242,12 @@ public class ImageProcessingControllerImp implements ImageProcessingController, 
     this.view.quit();
   }
 
-  // TODO: document this change and confirm that it is correct
+  // TODO: document addition of this method
   @Override
   public void mosaic(String imageName, String destName, int seeds) {
-    if (this.model instanceof IMosaicImageProcessingModel) {
-      IMosaicImageProcessingModel mosaicModel = (IMosaicImageProcessingModel) this.model;
-      mosaicModel.mosaicImage(imageName, destName, seeds);
-      this.view.setHistogram(this.model.histogramList(destName));
-      this.view.refresh(this.model.getImages().get(destName));
-    } else {
-      throw new IllegalStateException("Mosaic not supported by this controller's model.");
-    }
+    this.model.mosaicImage(imageName, destName, seeds);
+    this.view.setHistogram(this.model.histogramList(destName));
+    this.view.refresh(this.model.getImages().get(destName));
   }
 
 }

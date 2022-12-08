@@ -112,6 +112,7 @@ public class MosaicImageProcessingModelImpl implements IMosaicImageProcessingMod
     return model.histogramList(name);
   }
 
+  // TODO: Document addition of this method
   @Override
   public void mosaicImage(String name, String destName, int numSeeds)
       throws IllegalArgumentException {
