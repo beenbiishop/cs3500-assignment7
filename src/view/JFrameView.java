@@ -279,7 +279,7 @@ public class JFrameView extends JFrame implements IView {
       imageLabel.setIcon(new ImageIcon(displayImage));
       imageName = destName;
     });
-    // TODO: Remove this code
+    // TODO: Document modification of this method to support mosaic
     mosaicButton.addActionListener(evt -> {
       int seeds = getNumberInput("Input mosaic seed amount.");
       String destName = JOptionPane.showInputDialog(this, "Provide destination name");
