@@ -1,8 +1,6 @@
 package controller.commands;
 
 import controller.MosaicImageProcessingCommand;
-import java.io.IOException;
-import model.IImageProcessingModel;
 import model.IMosaicImageProcessingModel;
 
 /**

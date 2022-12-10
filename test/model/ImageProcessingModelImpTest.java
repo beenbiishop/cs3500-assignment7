@@ -334,5 +334,24 @@ public class ImageProcessingModelImpTest {
     }
   }
 
-  // TODO: Write tests for the mosaic method
+  // TODO: Document new mosaic method test
+  @Test
+  public void testMosaic() {
+    IMosaicImageProcessingModel m1 = new MosaicImageProcessingModelImpl();
+    m1.loadImage("src/res/Kindred.ppm", "kindred");
+    m1.mosaicImage("kindred", "mosaic-kindred", 500);
+    Image mosaic = ImageUtil.readPPM("src/res/Kindred-Mosaic.ppm");
+    assertEquals(mosaic, m1.getImages().get("mosaic-kindred"));
+  }
+
+  @Test
+  public void mosaicImageInvalidName() {
+    IMosaicImageProcessingModel m1 = new MosaicImageProcessingModelImpl();
+    m1.loadImage("src/res/Kindred.ppm", "kindred");
+    try {
+      m1.sepiaImage("error", "mosaic-kindred");
+    } catch (IllegalArgumentException e) {
+      assertEquals("No image error found.", e.getMessage());
+    }
+  }
 }

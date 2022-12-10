@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Represents the model for the image processing program.
+ */
 public class MosaicImageProcessingModelImpl implements IMosaicImageProcessingModel {
 
   private final IImageProcessingModel model = new ImageProcessingModelImp();
